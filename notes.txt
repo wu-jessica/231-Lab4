@@ -1,0 +1,69 @@
+-Code to get "Entrezgene_..." fields:
+
+search_handle = Entrez.esearch(db=database,
+ term=query,
+ sort='relevance')
+
+
+i = Entrez.read(search_handle)['IdList'][0]
+
+xml_handle = Entrez.efetch(db=database, id=i, rettype='', retmode='xml')
+
+records = Entrez.parse(xml_handle)
+
+for record in records:
+
+	for item in record:
+		print(item)    # get XML fields for reference
+_________________________________________________________________________
+
+Name, Organism, Chr#: Entrezgene_gene, Entrezgene_source
+
+Start/end positions: Entrezgene_locus
+
+
+# geneid = int(record['Entrezgene_xtra-index-terms'][0][3:])  # gene ID: list with single element ['LOC<Gene ID>']
+# name = record['Entrezgene_gene']['Gene-ref']['Gene-ref_desc']   # gene name
+
+Prokaryotes don't have chromosomes!  Yes they do!!!!!!!!!!!   <----------------------------------------
+# label = locus_info['Gene-commentary_label'].split()
+# chr_num = int(label[1])
+_________________________________________________________________________
+
+-Scrapped recursive nested dict key search function
+def find_item(nested_dict, key):
+    if key in nested_dict: return(nested_dict[key])
+    for d in nested_dict:
+#         if isinstance(d, Bio.Entrez.Parser.DictionaryElement):
+#         if d.__class__ == 'Bio.Entrez.Parser.DictionaryElement':
+        if d is Entrez.Parser.DictionaryElement:
+            print('Found nested dict!')
+            return find_item(d, key) 
+
+_________________________________________________________________________
+
+-Error getting sequences from nucleotide DB
+IOPub data rate exceeded.
+The notebook server will temporarily stop sending output
+to the client in order to avoid crashing it.
+To change this limit, set the config variable
+`--NotebookApp.iopub_data_rate_limit`.
+
+Current values:
+NotebookApp.iopub_data_rate_limit=1000000.0 (bytes/sec)
+NotebookApp.rate_limit_window=3.0 (secs)
+
+_________________________________________________________________________
+
+-Not getting sequences
+13: ('phosphoglucomutase', 44010, 'Drosophila melanogaster', 16126017, 16128530, '')
+15: ('phosphofructokinase', 36060, 'Drosophila melanogaster', 10109739, 10117456, '')
+24: ('deoxyribose-phosphate aldolase', 36358, 'Drosophila melanogaster', 12425482, 12426974, '')
+
+32: ('citrate synthase', 348, 'Homo sapiens', 44905748, 44909394, '')
+34: ('transketolase', 7086, 'Homo sapiens', 53224706, 53256113, '')
+
+_________________________________________________________________________
+
+Fetching EC number for enzyme table
+['Entrezgene_prot']['Prot-ref']['Prot-ref_ec']

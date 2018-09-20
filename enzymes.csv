@@ -1,0 +1,13 @@
+name,pathway,EC_num
+phosphoglucomutase,glycolysis,5.4.2.2
+aldose 1-epimerase,glycolysis,5.1.3.3
+phosphofructokinase,glycolysis,2.7.1.11
+phosphopyruvate hydratase,glycolysis,4.2.1.11
+succinate dehydrogenase,citric acid cycle,1.2.1.16
+aconitase,citric acid cycle,4.2.1.3
+dihydrolipoyllysine-residue acetyltransferase,citric acid cycle,1.2.4.2
+citrate synthase,citric acid cycle,2.3.3.1
+glucose-6-phosphate isomerase,pentose phophate pathway,5.3.1.9
+transketolase,pentose phophate pathway,2.2.1.1
+malate dehydrogenase,pentose phophate pathway,1.1.1.37
+phosphogluconolactonase,pentose phophate pathway,3.1.1.31
